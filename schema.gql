@@ -16,4 +16,5 @@ type Mutation {
 
 type Query {
   countries: [Country!]!
+  countryByCode(code: String!): Country
 }

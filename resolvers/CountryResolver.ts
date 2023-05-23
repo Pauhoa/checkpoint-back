@@ -1,14 +1,19 @@
 import { Arg, Mutation, Query, Resolver } from "type-graphql";
 import { Country } from "../entities/Country";
-import { getConnection, getManager } from "typeorm";
+import { getManager, getRepository } from "typeorm";
 
 @Resolver()
 export class CountryResolver {
     @Query(() => [Country])
     async countries(): Promise<Country[]> {
-        const connection = getConnection();
-        const countryRepository = connection.getRepository(Country);
+        const countryRepository = getRepository(Country);
         return await countryRepository.find();
+    }
+
+    @Query(() => Country, { nullable: true })
+    async countryByCode(@Arg("code") code: string): Promise<Country | null> {
+        const countryRepository = getRepository(Country);
+        return await countryRepository.findOne({ where: { code } });
     }
 
     @Mutation(() => Country)
