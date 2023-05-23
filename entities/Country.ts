@@ -19,4 +19,8 @@ export class Country {
     @Field()
     @Column({ type: 'varchar' })
     emoji!: string;
+
+    @Field({ nullable: true })
+    @Column({ type: 'varchar', nullable: true })
+    codeContinent!: string;
 }

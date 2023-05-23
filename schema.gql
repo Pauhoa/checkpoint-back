@@ -5,16 +5,18 @@
 
 type Country {
   code: String!
+  codeContinent: String
   emoji: String!
   id: ID!
   name: String!
 }
 
 type Mutation {
-  addCountry(code: String!, emoji: String!, name: String!): Country!
+  addCountry(code: String!, codeContinent: String!, emoji: String!, name: String!): Country!
 }
 
 type Query {
   countries: [Country!]!
+  countriesByContinent(codeContinent: String!): [Country!]!
   countryByCode(code: String!): Country
 }
